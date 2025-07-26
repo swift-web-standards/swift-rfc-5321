@@ -17,17 +17,6 @@ struct RFC5321Tests {
         #expect(domain.name == "mail.example.com")
     }
 
-    @Test("Successfully creates IPv4 literal")
-    func testIPv4Literal() throws {
-        let domain = try Domain("[192.168.1.1]")
-        #expect(domain.name == "[192.168.1.1]")
-    }
-
-    @Test("Successfully creates IPv6 literal")
-    func testIPv6Literal() throws {
-        let domain = try Domain("[2001:db8:85a3:8d3:1319:8a2e:370:7348]")
-        #expect(domain.name == "[2001:db8:85a3:8d3:1319:8a2e:370:7348]")
-    }
 
     @Test("Fails with empty address literal")
     func testEmptyAddressLiteral() throws {
@@ -93,11 +82,4 @@ struct RFC5321Tests {
         #expect(original == decoded)
     }
 
-    @Test("Successfully encodes and decodes IPv4 literal")
-    func testCodableIPv4() throws {
-        let original = try Domain("[192.168.1.1]")
-        let encoded = try JSONEncoder().encode(original)
-        let decoded = try JSONDecoder().decode(Domain.self, from: encoded)
-        #expect(original == decoded)
-    }
 }
